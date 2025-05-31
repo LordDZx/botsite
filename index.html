@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GG Empire Bot - بوت GoodGame Empire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a6baf;
+            --secondary-color: #f1c40f;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tahoma', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .hero {
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--dark-color);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* صفحة التحميل */
+        .download-section {
+            padding: 80px 0;
+            background: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+        
+        .download-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .download-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .download-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .installation-guide {
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* صفحة التواصل */
+        .contact-section {
+            padding: 80px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .contact-info, .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .info-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-left: 15px;
+        }
+        
+        /* صفحة حقوق النشر */
+        .legal-section {
+            padding: 50px 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .legal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* الوضع الداكن */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .features,
+        .dark-mode .download-section,
+        .dark-mode .contact-section,
+        .dark-mode .legal-section {
+            background-color: #2d2d2d;
+        }
+        
+        .dark-mode .feature-card,
+        .dark-mode .download-card,
+        .dark-mode .contact-info,
+        .dark-mode .contact-form,
+        .dark-mode .legal-content,
+        .dark-mode .installation-guide {
+            background-color: #333;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode header {
+            background: linear-gradient(135deg, #2c3e50, #1a1a1a);
+        }
+        
+        .dark-mode footer {
+            background-color: #1a1a1a;
+        }
+        
+        .dark-mode .section-title p {
+            color: #aaa;
+        }
+        
+        .dark-mode input,
+        .dark-mode textarea {
+            background-color: #444;
+            color: #fff;
+            border-color: #555;
+        }
+        
+        /* زر تبديل الوضع الداكن */
+        .theme-switch {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+        
+        .theme-switch-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-switch-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* نافذة التحميل */
+        .download-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .download-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .dark-mode .download-modal-content {
+            background: #333;
+            color: #fff;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .dark-mode .progress-bar {
+            background: #555;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 0;
+            background: var(--primary-color);
+            transition: width 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .download-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>GG Empire Bot</span>
+                    <i class="fas fa-robot"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="features.html">المميزات</a></li>
+                    <li><a href="download.html">تحميل</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="download-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>تحميل البوت</h2>
+                <p>اختر النسخة المناسبة لجهازك وقم بالتحميل الآن</p>
+            </div>
+            
+            <div class="download-options">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fab fa-windows"></i>
+                    </div>
+                    <h3>نسخة ويندوز</h3>
+                    <p>متوافق مع ويندوز 7/8/10/11</p>
+                    <button id="downloadBtn" class="btn" style="margin-top: 15px;">تحميل الآن</button>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">الإصدار الوحيد المتاح</p>
+                </div>
+            </div>
+            
+            <div class="installation-guide">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--primary-color);">تعليمات التثبيت</h3>
+                <ol style="padding-right: 20px;">
+                    <li style="margin-bottom: 15px;">قم بتحميل ملف الإعداد من الزر بالأعلى</li>
+                    <li style="margin-bottom: 15px;">افتح ملف التثبيت بعد اكتمال التحميل</li>
+                    <li style="margin-bottom: 15px;">اتبع خطوات التثبيت كما تظهر على الشاشة</li>
+                    <li style="margin-bottom: 15px;">بعد اكتمال التثبيت، شغل البرنامج من قائمة ابدأ</li>
+                    <li style="margin-bottom: 15px;">قم بتسجيل الدخول بحساب اللعبة</li>
+                    <li>استمتع بتجربة لعب أوتوماتيكية!</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    
+    <!-- نافذة التحميل -->
+    <div class="download-modal" id="downloadModal">
+        <div class="download-modal-content">
+            <h3>جاري تجهيز التحميل</h3>
+            <p>يتم الآن طلب ملف التحميل من السيرفر، الرجاء الانتظار...</p>
+            <div class="progress-bar">
+                <div class="progress" id="downloadProgress"></div>
+            </div>
+            <p id="downloadStatus">جاري التجهيز...</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن البوت</h3>
+                    <p>بوت GoodGame Empire هو أداة مساعدة للعبة تساعدك في أتمتة المهام الروتينية لتتمكن من التركيز على الجوانب الاستراتيجية.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="features.html">المميزات</a></li>
+                        <li><a href="download.html">تحميل</a></li>
+                        <li><a href="privacy.html">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>تواصل معنا</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> ahmed.r.elshrief@gmail.com</li>
+                        <li>
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/ahmed.r.el.shrief/" target="_blank"><i class="fab fa-facebook"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 GG Empire Bot. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // تبديل الوضع الداكن
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeSwitchBtn = document.createElement('button');
+            themeSwitchBtn.className = 'theme-switch-btn';
+            themeSwitchBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            themeSwitchBtn.title = 'تبديل الوضع الداكن';
+            
+            const themeSwitch = document.createElement('div');
+            themeSwitch.className = 'theme-switch';
+            themeSwitch.appendChild(themeSwitchBtn);
+            document.body.appendChild(themeSwitch);
+            
+            // التحقق من تفضيلات المستخدم
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                themeSwitchBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+            
+            themeSwitchBtn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    themeSwitchBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    themeSwitchBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+            
+            // محاكاة عملية التحميل
+            const downloadBtn = document.getElementById('downloadBtn');
+            const downloadModal = document.getElementById('downloadModal');
+            const downloadProgress = document.getElementById('downloadProgress');
+            const downloadStatus = document.getElementById('downloadStatus');
+            
+            downloadBtn.addEventListener('click', function() {
+                // عرض نافذة التحميل
+                downloadModal.style.display = 'flex';
+                
+                // محاكاة التقدم في التحميل
+                let progress = 0;
+                const interval = setInterval(function() {
+                    progress += 5;
+                    downloadProgress.style.width = progress + '%';
+                    
+                    if (progress < 30) {
+                        downloadStatus.textContent = 'جاري الاتصال بالسيرفر...';
+                    } else if (progress < 60) {
+                        downloadStatus.textContent = 'جاري تحضير الملف...';
+                    } else if (progress < 90) {
+                        downloadStatus.textContent = 'جاري التحميل...';
+                    } else {
+                        downloadStatus.textContent = 'جاري التجهيز للتنزيل...';
+                    }
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        downloadStatus.textContent = 'اكتمل التجهيز، سيبدأ التحميل تلقائياً...';
+                        
+                        // بعد 2 ثانية، ابدأ التحميل الفعلي
+                        setTimeout(function() {
+                            downloadModal.style.display = 'none';
+                            
+                            // هنا يمكنك وضع رابط التحميل الفعلي
+                            const link = document.createElement('a');
+                            link.href = 'GG_Empire_Bot_Setup.exe'; // اسم ملف التحميل
+                            link.download = 'GG_Empire_Bot_Setup.exe';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }, 2000);
+                    }
+                }, 200); // تحديث كل 200 مللي ثانية
+            });
+        });
+    </script>
+</body>
+</html>
